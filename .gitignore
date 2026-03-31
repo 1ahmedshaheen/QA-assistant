@@ -26,6 +26,10 @@ vectorstore/
 # Uploaded documents
 data/uploads/
 
+# test details
+test_detail.txt
+test_detail_2.txt
+
 # Hugging Face model cache (large)
 .cache/
 *.safetensors
