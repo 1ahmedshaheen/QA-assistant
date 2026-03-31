@@ -1,0 +1,154 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\ITI AI Track\Gen AI (Advanced)\contract_assistant
+plugins: anyio-4.12.1, langsmith-0.7.10
+collected 6 items
+
+tests\test_pipelines.py .....F                                           [100%]
+
+================================== FAILURES ===================================
+____________________________ test_generator_chain _____________________________
+
+mock_llm_func = <MagicMock name='get_llm' id='1546191224912'>
+
+    @patch("app.pipelines.rag_chain.get_llm")
+    def test_generator_chain(mock_llm_func):
+        mock_llm = MagicMock()
+        mock_llm.invoke.return_value = MagicMock(content="Generated answer.")
+        mock_llm_func.return_value = mock_llm
+    
+        chain = build_generator_chain()
+>       answer = chain.invoke({"input": "What is test?", "context": "Test context."})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_pipelines.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+venv\Lib\site-packages\langchain_core\runnables\base.py:5018: in invoke
+    return self._call_with_config(
+venv\Lib\site-packages\langchain_core\runnables\base.py:2060: in _call_with_config
+    context.run(
+venv\Lib\site-packages\langchain_core\runnables\config.py:461: in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\langchain_core\runnables\base.py:4875: in _invoke
+    output = call_func_with_variable_args(
+venv\Lib\site-packages\langchain_core\runnables\config.py:461: in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+app\pipelines\rag_chain.py:113: in chain_with_logging
+    result = chain.invoke(input_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\langchain_core\runnables\base.py:3157: in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\langchain_core\output_parsers\base.py:215: in invoke
+    return self._call_with_config(
+venv\Lib\site-packages\langchain_core\runnables\base.py:2060: in _call_with_config
+    context.run(
+venv\Lib\site-packages\langchain_core\runnables\config.py:461: in call_func_with_variable_args
+    return func(input, **kwargs)  # type: ignore[call-arg]
+           ^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\langchain_core\output_parsers\base.py:216: in <lambda>
+    lambda inner_input: self.parse_result([Generation(text=inner_input)]),
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Generation(), args = ()
+kwargs = {'text': <MagicMock name='get_llm()()' id='1546191228608'>}
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """"""  # noqa: D419  # Intentional blank docstring
+>       super().__init__(*args, **kwargs)
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for Generation
+E       text
+E         Input should be a valid string [type=string_type, input_value=<MagicMock name='get_llm()()' id='1546191228608'>, input_type=MagicMock]
+E           For further information visit https://errors.pydantic.dev/2.12/v/string_type
+
+venv\Lib\site-packages\langchain_core\load\serializable.py:118: ValidationError
+---------------------------- Captured stderr call -----------------------------
+2026-03-07 18:30:33.816 | INFO     | app.pipelines.rag_chain:chain_with_logging:112 - [RAG] Generating answer for: What is test?...
+============================== warnings summary ===============================
+config\settings.py:11
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:11: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    llm_provider: str = Field("openai", env="LLM_PROVIDER")
+
+config\settings.py:12
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:12: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    openai_api_key: str = Field("", env="OPENAI_API_KEY")
+
+config\settings.py:13
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:13: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    nvidia_api_key: str = Field("", env="NVIDIA_API_KEY")
+
+config\settings.py:14
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:14: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    llm_model: str = Field("gpt-3.5-turbo", env="LLM_MODEL")
+
+config\settings.py:15
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:15: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    llm_temperature: float = Field(0.2, env="LLM_TEMPERATURE")
+
+config\settings.py:16
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:16: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    llm_max_tokens: int = Field(1024, env="LLM_MAX_TOKENS")
+
+config\settings.py:19
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:19: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    embedding_provider: str = Field("sentence-transformers", env="EMBEDDING_PROVIDER")
+
+config\settings.py:20
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:20: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    embedding_model: str = Field("all-MiniLM-L6-v2", env="EMBEDDING_MODEL")
+
+config\settings.py:23
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:23: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    vector_store: str = Field("chroma", env="VECTOR_STORE")
+
+config\settings.py:24
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:24: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    chroma_persist_dir: str = Field("./vectorstore/chroma_db", env="CHROMA_PERSIST_DIR")
+
+config\settings.py:25
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:25: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    faiss_index_path: str = Field("./vectorstore/faiss_index", env="FAISS_INDEX_PATH")
+
+config\settings.py:28
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:28: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    chunk_size: int = Field(512, env="CHUNK_SIZE")
+
+config\settings.py:29
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:29: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    chunk_overlap: int = Field(64, env="CHUNK_OVERLAP")
+
+config\settings.py:32
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:32: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    langserve_port: int = Field(9012, env="LANGSERVE_PORT")
+
+config\settings.py:33
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:33: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    gradio_port: int = Field(8090, env="GRADIO_PORT")
+
+config\settings.py:36
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:36: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    guardrail_similarity_threshold: float = Field(0.75, env="GUARDRAIL_SIMILARITY_THRESHOLD")
+
+config\settings.py:37
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:37: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    max_context_docs: int = Field(5, env="MAX_CONTEXT_DOCS")
+
+config\settings.py:40
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:40: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    log_level: str = Field("INFO", env="LOG_LEVEL")
+
+config\settings.py:43
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:43: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    model_mode: str = Field("local", env="MODEL_MODE")
+
+config\settings.py:9
+  C:\ITI AI Track\Gen AI (Advanced)\contract_assistant\config\settings.py:9: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Settings(BaseSettings):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_pipelines.py::test_generator_chain - pydantic_core._pydanti...
+================== 1 failed, 5 passed, 20 warnings in 26.07s ==================

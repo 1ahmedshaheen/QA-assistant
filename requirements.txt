@@ -1,0 +1,59 @@
+# ═══════════════════════════════════════════════════════
+#  Smart Contract Summary & Q&A Assistant
+#  requirements.txt — Python 3.10-3.13
+#  Install: pip install -r requirements.txt
+# ═══════════════════════════════════════════════════════
+
+# ── Core LangChain ────────────────────────────────────
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain-huggingface
+langchain-text-splitters
+langserve[all]
+langchain-ollama
+
+# ── LLM Providers ────────────────────────────────────
+openai
+transformers
+accelerate
+huggingface-hub
+
+# ── Embeddings ───────────────────────────────────────
+sentence-transformers
+tiktoken
+
+# ── Vector Stores ─────────────────────────────────────
+chromadb
+faiss-cpu
+
+# ── Document Parsing ─────────────────────────────────
+pymupdf
+pdfplumber
+python-docx
+
+# ── API / Backend ────────────────────────────────────
+fastapi
+uvicorn[standard]
+httpx
+sse-starlette
+python-multipart
+
+# ── Frontend ─────────────────────────────────────────
+gradio
+
+# ── Evaluation ───────────────────────────────────────
+ragas
+rouge-score
+bert-score
+pandas
+numpy
+
+# ── Utilities ────────────────────────────────────────
+python-dotenv
+pydantic
+pydantic-settings
+loguru
+tqdm
+rich

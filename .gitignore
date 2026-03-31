@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# Virtual envs
+venv/
+.venv/
+env/
+ENV/
+
+# Environment / secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vector store data (auto-created)
+vectorstore/
+
+# Uploaded documents
+data/uploads/
+
+# Hugging Face model cache (large)
+.cache/
+*.safetensors
+*.bin
+
+# Logs
+*.log
+
+# Test artifacts
+evaluation/test_results.json
+
+# OS
+.DS_Store
+Thumbs.db
